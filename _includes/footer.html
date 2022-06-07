@@ -1,117 +1,65 @@
-    <footer class="container">
+<footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <h4>CONTACT</h4>
 
-      {% include footer-ad.html %}
+        <div class="social-links">
+          {% for contact in site.footer.contact %}
+            <div class="social-link contact-links">
 
-        <div class="site-footer" role="contentinfo">
-            <div class="copyright left mobile-block">
-                    © {{ site.since }}
-                    <span title="{{ site.author}}">{{ site.author }}</span>
-                    <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+              {% assign contact_icon_path = "/assets/img/icons/" | append: contact.name | downcase | append: ".png" | absolute_url %}
+              <img
+                src="{{ contact_icon_path }}"
+                alt="{{ contact.name | downcase }}"
+              />
+              <a href="{{ contact.link }}" id="{{ contact.name | downcase }}-link">
+                {% if contact.value and contact.value != "" and contact.value != nil %}
+                  {{ contact.value }}
+                {% else %}
+                  {{ contact.name }}
+                {% endif %}
+              </a>
             </div>
 
-            <ul class="site-footer-links right mobile-hidden">
-                <li>
-                    <a href="javascript:window.scrollTo(0,0)" >TOP</a>
-                </li>
-            </ul>
-            <a href="{{ site.github.repository_url }}" target="_blank" aria-label="view source code">
-                <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
-            </a>
-            <ul class="site-footer-links mobile-hidden">
-                {% for nav in site.navs %}
-                <li>
-                    <a href="{{ site.url }}{{ nav.href }}" title="{{ nav.label }}" target="{{ nav.target | default: _self }}">{{ nav.label }}</a>
-                </li>
-                {% endfor %}
-                <li><a href="{{ site.url }}{{ site.subscribe_rss }}"><span class="octicon octicon-rss" style="color:orange;"></span></a></li>
-            </ul>
-
-          {% include visit-stat.html %}
-
+          {% endfor %}
         </div>
-    </footer>
-    <div class="tools-wrapper">
-      <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h4>FOLLOW</h4>
+
+        <div class="social-links follow-links">
+          {% for follow in site.footer.follow %}
+            <div class="social-link">
+
+              {% assign follow_icon_path = "/assets/img/icons/" | append: follow.name | downcase | append: ".png" | absolute_url %}
+              <img
+                src="{{ follow_icon_path }}"
+                alt="{{ follow.name | downcase }}"
+              />
+              <a href="{{ follow.link }}">
+                {% if follow.value and follow.value != "" and follow.value != nil %}
+                  {{ follow.value }}
+                {% else %}
+                  {{ follow.name }}
+                {% endif %}
+              </a>
+            </div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if site.footer.show_powered_by == true %}
+        <div class="footer-col footer-col-3 powered-by">
+          <p>
+            powered by <a href="https://github.com/eliottvincent/bay">Bay</a> | {{ 'now' | date: "%Y" }}
+          </p>
+        </div>
+      {% endif %}
     </div>
-    <!-- / footer -->
-    {% if site.components.share.enabled %}
-    <script src="{{ assets_base_url }}/assets/vendor/share.js/dist/js/share.min.js"></script>
-    {% endif %}
-    <script src="{{ assets_base_url }}/assets/js/geopattern.js"></script>
-    <script>
-      jQuery(document).ready(function($) {
-        $('.geopattern').each(function(){
-          $(this).geopattern($(this).data('pattern-id'));
-        });
-       /* hljs.initHighlightingOnLoad(); */
-      });
-    </script>
+  </div>
+</footer>
 
-    {% if page.mermaid %}
-    <script src="{{ assets_base_url }}/assets/js/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
-    {% endif %}
-
-    {% if page.sequence %}
-    <script src="{{ assets_base_url }}/assets/js/webfont.js"></script>
-    <script src="{{ assets_base_url }}/assets/js/snap.svg-min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
-    <script src="{{ assets_base_url }}/assets/vendor/js-sequence-diagrams/dist/sequence-diagram-min.js"></script>
-    <link rel="stylesheet" href="{{ assets_base_url }}/assets/vendor/js-sequence-diagrams/dist/sequence-diagram-min.css">
-    <script>
-      $(".language-sequence").sequenceDiagram({theme: 'simple'});
-    </script>
-    {% endif %}
-
-    {% if page.flow %}
-    <script src="{{ assets_base_url }}/assets/js/raphael.min.js"></script>
-    <script src="{{ assets_base_url }}/assets/vendor/flowchart.js/dist/flowchart.min.js"></script>
-    <script src="{{ assets_base_url }}/assets/js/flow.js"></script>
-    {% endif %}
-
-    {% if page.mathjax %}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    {% endif %}
-
-    {% if page.mindmap %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/kityminder-core@dev/dist/kityminder.core.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mzlogin/kity@dev/dist/kity.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mzlogin/kityminder-core@dev/dist/kityminder.core.min.js"></script>
-    <script>
-$(document).ready(function(){
-  $('.language-mindmap').each(function(index, element) {
-    var markdownText = element.textContent.trim();
-    var parentNode = element.parentNode.parentNode;
-    var nodeName = '.language-mindmap-' + index;
-    var node = document.createElement("div");
-    node.className = 'language-mindmap-' + index;
-    node.style.height = '' + $(element).height() + 'px';
-    parentNode.insertBefore(node, element.parentNode);
-    var minder = new kityminder.Minder({
-      renderTo: nodeName
-    });
-    minder.importData('markdown', markdownText);
-    /* minder.disable(); */
-    minder.execCommand('hand');
-
-    var viewerTipNode = document.createElement("a");
-    viewerTipNode.setAttribute('href', '{{ site.url }}/mindmap-viewer/?data=' + encodeURIComponent(markdownText));
-    viewerTipNode.setAttribute('target', '_blank');
-    viewerTipNode.setAttribute('style', 'font-size:0.8rem;font-style:italic;font-color:grey;');
-    viewerTipNode.innerText = '全屏查看';
-    parentNode.insertBefore(viewerTipNode, element.parentNode);
-
-    element.parentNode.style.display = 'none';
-
-    {% if page.mindmap-template %}
-    setTimeout(function() {
-      minder.setTemplate('{{ page.mindmap-template }}');
-      minder.refresh();
-    }, 100);
-    {% endif %}
-  });
-});
-    </script>
-    {% endif %}
-</body>
-</html>
+{% include wechat-widget.html %}
