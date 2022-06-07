@@ -15,12 +15,11 @@ profile_picture:
 <p>常用语言: Java(和比较少用的Lua)</p>
 <p>领域方向: 后端、分布式、微服务、虚拟化</p>
 
-
 <p>退休R6、WarFrame玩家，目前常驻PS5和IDEA</p>
 <p>热衷于开发To Developer通用应用框架</p>
 <p>Redis、EearchSearch、SpringCloud NetFlix、SpringCloud Alibaba等流行框架都有实践与应用</p>
 <p>微服务、DevOps等有实际的开发经验以及相关概念延伸出的分布式相关的开发框架</p>
-<p>目前主要维护的框架是Kache-Cache缓存框架：[Kache-Cache](https://github.com/KKould/Kache-Cache)</p>
+<p>目前主要维护的框架是Kache-Cache缓存框架<a href="https://github.com/KKould/Kache-Cache">Kache-Cache</a></p>
 
 <p>喜欢做硬核的事情</p>
 <p>曾热衷于多轴无人机拼装与设计，有一些CAD和SolidWork经验</p>
